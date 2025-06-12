@@ -8,11 +8,13 @@ const Header = () => {
       style={{
         display: "flex",
         height: "60px",
+        minHeight: "60px",
         width: "100%",
         backgroundColor: themeData.primary,
         flexDirection: "column",
         textOverflow: "ellipsis",
         borderBottom: `1px solid ${themeData.border}`,
+        position: "static"
       }}
     >
       <div
@@ -32,7 +34,9 @@ const Header = () => {
             width: "24px",
             height: "24px",
             objectFit: "contain",
+            cursor: "pointer",
           }}
+          onClick={() => {}}
         />
         <div
           style={{

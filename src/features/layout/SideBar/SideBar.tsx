@@ -1,10 +1,12 @@
+import type { SideBarProps } from "./SideBar.types";
 import { useState } from "react";
-import SideBarItem from "../../common/SideBarItem";
+import SideBarItem from "../../../components/navigation/SideBarItem";
 import { useTheme } from "../../../hooks/useTheme";
 import logo from "../../../assets/wamoLogo.png";
 import invoiceButton from "../../../assets/invoiceButton.png";
+import { fonts } from "../../../constants/fonts";
 
-const SideBar = () => {
+const SideBar = ({ initials }: SideBarProps) => {
   const { themeData } = useTheme();
   const [selectedItem, setSelectedItem] = useState<string>("Pending Scans");
 
@@ -36,12 +38,13 @@ const SideBar = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "100%",
+        height: "100vh",
         width: "80px",
         boxShadow: "0",
         backgroundColor: themeData.primary,
         borderRight: `1px solid ${themeData.border}`,
         justifyContent: "space-between",
+        alignItems: "center",
       }}
     >
       <div
@@ -102,15 +105,17 @@ const SideBar = () => {
           backgroundColor: "#e8e9ed",
           alignItems: "center",
           justifyContent: "center",
+          alignContent: "center",
+          justifyItems: "center",
           marginBottom: "20px",
-          marginLeft: "15px",
-          marginRight: "15px",
-          fontFamily: "Inter, sans-serif",
-          fontSize: "14px",
-          fontWeight: "400",
+          fontFamily: fonts.body,
+          fontSize: fonts.medium,
+          fontWeight: fonts.lightWeight,
+          cursor: "pointer",
         }}
+        onClick={() => {}}
       >
-        AE
+        {initials}
       </div>
     </div>
   );

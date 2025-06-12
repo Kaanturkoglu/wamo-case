@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { lightTheme, darkTheme } from "../theme/colors";
+import { lightTheme, darkTheme } from "../constants/colors";
 
 type ThemeName = "light" | "dark";
 

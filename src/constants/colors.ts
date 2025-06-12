@@ -4,6 +4,7 @@ export const lightTheme = {
   background: "#f4f5f8",
   text: "#191919",
   border: "#e0e0e0",
+  gray: "#b4b5b7"
 };
 
 export const darkTheme = {
@@ -12,4 +13,5 @@ export const darkTheme = {
   background: "#121212",
   text: "#f9f9f9",
   border: "#e0e0e0",
+  gray: "#b4b5b7"
 };

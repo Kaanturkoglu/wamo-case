@@ -1,5 +1,6 @@
 import { ThemeProvider } from "../../context/ThemeContext";
-import InvoiceLayout from "../../components/layout/InvoiceLayout";
+import InvoiceFormPanel from "../../features/invoice/InvoiceFormPanel/InvoiceFormPanel";
+import InvoiceLayout from "../../layouts/InvoiceLayout";
 
 const InvoiceScreen = () => {
   return (
@@ -17,8 +18,18 @@ const InvoiceScreen = () => {
     >
       <ThemeProvider>
         <InvoiceLayout>
-          {/* Add your invoice content here */}
-          aa
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minWidth: "660px",
+            }}
+          >
+            <InvoiceFormPanel></InvoiceFormPanel>
+          </div>
         </InvoiceLayout>
       </ThemeProvider>
     </div>
