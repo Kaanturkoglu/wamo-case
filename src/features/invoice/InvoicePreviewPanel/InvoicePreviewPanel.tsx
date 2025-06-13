@@ -1,9 +1,11 @@
+import Footer from "../components/InvoicePreview/Footer";
 import Divider from "../../../components/common/Divider";
 import { useTheme } from "../../../hooks/useTheme";
 import Header from "../components/InvoicePreview/Header";
 import InvoiceParties from "../components/InvoicePreview/InvoiceParties/InvoiceParties";
 import type { InvoicePreviewPanelProps } from "./InvoicePreviewPanel.types";
 import dayjs from "dayjs";
+import NotesSection from "../components/InvoicePreview/NotesSection";
 
 const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
   const { themeData } = useTheme();
@@ -34,37 +36,50 @@ const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
           display: "flex",
           height: "100%",
           flexDirection: "column",
-          justifyContent: "start",
+          justifyContent: "space-between",
           alignItems: "start",
           overflowY: "auto",
           overflowX: "hidden",
           padding: "20px",
         }}
       >
-        <Header
-          issueDate={formattedIssueDate}
-          dueDate={formattedDueDate}
-          invoiceNumber={"#INV-71"}
-        ></Header>
-        <Divider
-          orientation="horizontal"
-          color="#b4b5b7"
-          thickness={1.5}
-          length="100%"
-          margin="10px 0"
-          opacity={0.5}
-          style={{ marginBottom: "20px" }}
-        ></Divider>
-        <InvoiceParties></InvoiceParties>
-        <Divider
-          orientation="horizontal"
-          color="#b4b5b7"
-          thickness={1.5}
-          length="100%"
-          margin="10px 0"
-          opacity={0.5}
-          style={{ marginTop: "20px" }}
-        ></Divider>
+        <div style={{ width: "100%" }}>
+          <Header
+            issueDate={formattedIssueDate}
+            dueDate={formattedDueDate}
+            invoiceNumber={"#INV-71"}
+          ></Header>
+          <Divider
+            orientation="horizontal"
+            color="#b4b5b7"
+            thickness={1.5}
+            length="100%"
+            margin="10px 0"
+            opacity={0.5}
+            style={{ marginBottom: "20px" }}
+          ></Divider>
+          <InvoiceParties></InvoiceParties>
+          <Divider
+            orientation="horizontal"
+            color="#b4b5b7"
+            thickness={1.5}
+            length="100%"
+            margin="10px 0"
+            opacity={0.5}
+            style={{ marginTop: "20px" }}
+          ></Divider>
+        </div>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
+          <NotesSection></NotesSection>
+          <Footer companyName="Acme Inc." invoiceId="#INV-71"></Footer>
+        </div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const HeaderItem = ({ title, value }: HeaderItemProps) => {
         style={{
           fontSize: fonts.small,
           fontWeight: fonts.mediumWeight,
-          color: "#b4b5b7",
+          color: themeData.gray,
           fontFamily: fonts.body,
           marginBottom: "4px",
         }}

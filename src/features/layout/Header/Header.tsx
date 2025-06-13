@@ -1,8 +1,11 @@
 import { useTheme } from "../../../hooks/useTheme";
 import cross from "../../../assets/cross.png";
+import crossWhite from "../../../assets/crossWhite.png";
+import { fonts } from "../../../constants/fonts";
+import type { HeaderProps } from "./Header.types";
 
-const Header = () => {
-  const { themeData } = useTheme();
+const Header = ({invoiceId} : HeaderProps) => {
+  const { theme, themeData } = useTheme();
   return (
     <div
       style={{
@@ -14,7 +17,7 @@ const Header = () => {
         flexDirection: "column",
         textOverflow: "ellipsis",
         borderBottom: `1px solid ${themeData.border}`,
-        position: "static"
+        position: "static",
       }}
     >
       <div
@@ -28,7 +31,7 @@ const Header = () => {
         }}
       >
         <img
-          src={cross}
+          src={theme == "light" ? cross : crossWhite}
           alt="Cross Icon"
           style={{
             width: "24px",
@@ -40,20 +43,22 @@ const Header = () => {
         />
         <div
           style={{
-            color: "lightgray",
-            fontSize: "14px",
+            color: themeData.gray,
+            fontWeight: fonts.mediumWeight,
+            fontSize: fonts.medium,
             paddingLeft: "10px",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: fonts.body,
           }}
         >
           Invoice
         </div>
         <div
           style={{
-            color: "lightgray",
-            fontSize: "16px",
+            color: themeData.gray,
+            fontWeight: fonts.mediumWeight,
+            fontSize: fonts.large,
             paddingLeft: "8px",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: fonts.body,
           }}
         >
           •
@@ -61,17 +66,17 @@ const Header = () => {
         <div
           style={{
             color: themeData.text,
-            fontSize: "14px",
-            fontWeight: "600",
+            fontSize: fonts.medium,
+            fontWeight: fonts.boldWeight,
             paddingLeft: "8px",
-            fontFamily: "Inter, sans-serif",
+            fontFamily: fonts.body,
             overflow: "hidden",
             textOverflow: "ellipsis",
             maxWidth: "200px",
             whiteSpace: "nowrap",
           }}
         >
-          New invoice #INV-71
+          New invoice {invoiceId}
         </div>
       </div>
     </div>

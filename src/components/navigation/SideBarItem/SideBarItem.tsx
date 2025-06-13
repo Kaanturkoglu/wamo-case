@@ -1,12 +1,16 @@
 import { Button } from "antd";
 import type { SideBarItemProps } from "./SideBarItem.types";
-//import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../../hooks/useTheme";
+import { hexToRgb } from "../../../utils/hexToRgb";
 
 const SideBarItem = ({ isSelected, onSelect, icon }: SideBarItemProps) => {
-  //const { themeData, theme } = useTheme();
+  const { themeData } = useTheme();
 
+  const secondaryRgb = hexToRgb(themeData.secondary);
   const selectedBackground = isSelected
-    ? "rgba(82, 11, 244, 0.2)"
+    ? secondaryRgb
+      ? `rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.2)`
+      : "rgba(82, 11, 244, 0.2)"
     : "transparent";
 
   return (
@@ -15,8 +19,6 @@ const SideBarItem = ({ isSelected, onSelect, icon }: SideBarItemProps) => {
       style={{
         width: "100%",
         height: "50px",
-        alignContent: "center",
-        borderWidth: "0px",
         cursor: "pointer",
       }}
     >

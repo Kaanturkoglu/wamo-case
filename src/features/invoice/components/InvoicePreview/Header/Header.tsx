@@ -1,17 +1,17 @@
 import type { HeaderProps } from "./Header.types";
-import bigLogo from "../../../../../assets/wamoLogoBig.png";
+import wamoLogoLargePurple from "../../../../../assets/wamoLogoBig.png";
+import wamoLogoLargeGreen from "../../../../../assets/wamoLogoGreenLarge.png";
 import { useTheme } from "../../../../../hooks/useTheme";
 import InvoiceHeaderItem from "../HeaderItem";
 import Divider from "../../../../../components/common/Divider";
 
 const Header = ({ issueDate, dueDate, invoiceNumber }: HeaderProps) => {
-  const { themeData } = useTheme();
+  const { theme, themeData } = useTheme();
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "row",
-        height: "50px",
         width: "100%",
         justifyContent: "space-between",
         alignItems: "start",
@@ -21,7 +21,7 @@ const Header = ({ issueDate, dueDate, invoiceNumber }: HeaderProps) => {
     >
       <div style={{ display: "flex" }}>
         <img
-          src={bigLogo}
+          src={theme === "light" ? wamoLogoLargePurple : wamoLogoLargeGreen}
           alt="Logo"
           style={{
             width: "160px",

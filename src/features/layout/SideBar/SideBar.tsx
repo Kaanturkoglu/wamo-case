@@ -3,11 +3,14 @@ import { useState } from "react";
 import SideBarItem from "../../../components/navigation/SideBarItem";
 import { useTheme } from "../../../hooks/useTheme";
 import logo from "../../../assets/wamoLogo.png";
-import invoiceButton from "../../../assets/invoiceButton.png";
+import greenLogo from "../../../assets/wamoLogoGreenSmall.png";
+import invoiceButtonPurple from "../../../assets/invoiceButtonPurple.png";
+import invoiceButtonGreen from "../../../assets/invoiceButtonGreen.png";
+
 import { fonts } from "../../../constants/fonts";
 
 const SideBar = ({ initials }: SideBarProps) => {
-  const { themeData } = useTheme();
+  const { theme, themeData } = useTheme();
   const [selectedItem, setSelectedItem] = useState<string>("Pending Scans");
 
   const handleItemSelect = (text: string) => {
@@ -19,11 +22,11 @@ const SideBar = ({ initials }: SideBarProps) => {
       text: "Create Invoice",
       icon: (
         <img
-          src={invoiceButton}
+          src={theme == "light" ? invoiceButtonPurple : invoiceButtonGreen}
           alt="Create Invoice"
           style={{
-            width: "26px",
-            height: "26px",
+            width: "28px",
+            height: "28px",
             objectFit: "contain",
           }}
         />
@@ -69,10 +72,11 @@ const SideBar = ({ initials }: SideBarProps) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              marginBottom: "10px",
             }}
           >
             <img
-              src={logo}
+              src={theme == "light" ? logo : greenLogo}
               alt="Logo"
               style={{
                 width: "40px",

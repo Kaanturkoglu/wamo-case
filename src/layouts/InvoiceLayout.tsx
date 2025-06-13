@@ -30,7 +30,7 @@ const InvoiceLayout: React.FC<InvoiceLayoutProps> = ({ children }) => {
           justifyContent: "start",
         }}
       >
-        <Header />
+        <Header invoiceId="#INV-71" />
         <div
           style={{
             flex: 1,

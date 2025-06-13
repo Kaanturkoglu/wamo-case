@@ -5,5 +5,5 @@ export interface InvoicePartyItemProps {
     addressLine1: string;
     addressLine2?: string;
     email: string;
-    phone: string;
+    phone?: string;
 }

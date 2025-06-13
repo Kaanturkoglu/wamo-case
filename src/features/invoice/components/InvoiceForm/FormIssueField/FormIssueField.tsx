@@ -4,11 +4,12 @@ import dayjs from "dayjs";
 import { useFormContext } from "react-hook-form";
 import { fonts } from "../../../../../constants/fonts";
 import { useTheme } from "../../../../../hooks/useTheme";
-import dateIcon from "../../../../../assets/datePickIcon.png";
+import dateIconPurple from "../../../../../assets/datePickIcon.png";
+import dateIconGreen from "../../../../../assets/datePickIconGreen.png";
 import type { InvoiceFormValues } from "../../../../../types/invoice";
 
 const FormIssueField: React.FC = () => {
-  const { themeData } = useTheme();
+  const { theme, themeData } = useTheme();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -71,7 +72,7 @@ const FormIssueField: React.FC = () => {
                 fontWeight: fonts.mediumWeight,
                 fontSize: fonts.medium,
                 marginBottom: "8px",
-                color: themeData.blue,
+                color: themeData.pickColor,
               }}
             >
               {formattedDate}
@@ -89,7 +90,7 @@ const FormIssueField: React.FC = () => {
             }}
           >
             <img
-              src={dateIcon}
+              src={theme === "light" ? dateIconPurple : dateIconGreen}
               alt="Date Pick"
               style={{
                 height: "26px",
