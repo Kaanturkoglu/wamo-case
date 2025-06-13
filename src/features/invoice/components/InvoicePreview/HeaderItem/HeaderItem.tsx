@@ -1,8 +1,8 @@
-import { fonts } from "../../../../constants/fonts";
-import { useTheme } from "../../../../hooks/useTheme";
-import type { InvoiceHeaderItemProps } from "./InvoiceHeaderItem.types";
+import { fonts } from "../../../../../constants/fonts";
+import { useTheme } from "../../../../../hooks/useTheme";
+import type { HeaderItemProps } from "./HeaderItem.types";
 
-const InvoiceHeaderItem = ({ title, value }: InvoiceHeaderItemProps) => {
+const HeaderItem = ({ title, value }: HeaderItemProps) => {
   const { themeData } = useTheme();
   return (
     <div
@@ -42,4 +42,4 @@ const InvoiceHeaderItem = ({ title, value }: InvoiceHeaderItemProps) => {
   );
 };
 
-export default InvoiceHeaderItem;
+export default HeaderItem;

@@ -1,14 +1,10 @@
-import type { InvoiceHeaderProps } from "./InvoiceHeader.types";
-import bigLogo from "../../../../assets/wamoLogoBig.png";
-import { useTheme } from "../../../../hooks/useTheme";
-import InvoiceHeaderItem from "../InvoicePreviewHeaderItem";
-import Divider from "../../../../components/common/Divider";
+import type { HeaderProps } from "./Header.types";
+import bigLogo from "../../../../../assets/wamoLogoBig.png";
+import { useTheme } from "../../../../../hooks/useTheme";
+import InvoiceHeaderItem from "../HeaderItem";
+import Divider from "../../../../../components/common/Divider";
 
-const InvoiceHeader = ({
-  issueDate,
-  dueDate,
-  invoiceNumber,
-}: InvoiceHeaderProps) => {
+const Header = ({ issueDate, dueDate, invoiceNumber }: HeaderProps) => {
   const { themeData } = useTheme();
   return (
     <div
@@ -20,6 +16,7 @@ const InvoiceHeader = ({
         justifyContent: "space-between",
         alignItems: "start",
         backgroundColor: themeData.primary,
+        marginRight: "20px",
       }}
     >
       <div style={{ display: "flex" }}>
@@ -61,4 +58,4 @@ const InvoiceHeader = ({
   );
 };
 
-export default InvoiceHeader;
+export default Header;

@@ -1,16 +1,26 @@
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from "react-hook-form";
+import type { InvoiceFormValues } from "../types/invoice.ts";
 
-export const useInvoiceForm = () => {
-  const form = useForm({
+const todayStr = new Date().toISOString().slice(0, 10);
+const defaultDue = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .slice(0, 10);
+
+export function useInvoiceForm() {
+  const form = useForm<InvoiceFormValues>({
     defaultValues: {
-      issueDate: new Date(),
-      dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), 
-      items: [],
-      vatType: 'standard',
-      customVat: 21
-    }
+      issueDate: todayStr,
+      dueDate: defaultDue,
+    },
+    mode: "onChange",
   });
 
-  const watchedValues = form.watch();
-  return { form, watchedValues };
-};
+  const watched = useWatch({
+    control: form.control,
+  });
+
+  return {
+    form,
+    watched,
+  };
+}

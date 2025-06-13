@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+/* import { useMemo } from 'react';
 
 export const useInvoiceCalculations = (items, vatRate) => {
   const calculations = useMemo(() => {
@@ -17,4 +17,4 @@ export const useInvoiceCalculations = (items, vatRate) => {
   }, [items, vatRate]);
 
   return calculations;
-};
+}; */

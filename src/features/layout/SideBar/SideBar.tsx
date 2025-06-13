@@ -102,7 +102,7 @@ const SideBar = ({ initials }: SideBarProps) => {
           width: "40px",
           height: "40px",
           borderRadius: "50%",
-          backgroundColor: "#e8e9ed",
+          backgroundColor: themeData.miniBackground,
           alignItems: "center",
           justifyContent: "center",
           alignContent: "center",
@@ -111,6 +111,7 @@ const SideBar = ({ initials }: SideBarProps) => {
           fontFamily: fonts.body,
           fontSize: fonts.medium,
           fontWeight: fonts.lightWeight,
+          color: themeData.text,
           cursor: "pointer",
         }}
         onClick={() => {}}

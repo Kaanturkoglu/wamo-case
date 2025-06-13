@@ -2,7 +2,6 @@ import React from "react";
 import SideBar from "../features/layout/SideBar";
 import Header from "../features/layout/Header/Header";
 import { useTheme } from "../hooks/useTheme";
-import InvoicePreviewPanel from "../features/invoice/InvoicePreviewPanel";
 
 interface InvoiceLayoutProps {
   children: React.ReactNode;
@@ -10,6 +9,7 @@ interface InvoiceLayoutProps {
 
 const InvoiceLayout: React.FC<InvoiceLayoutProps> = ({ children }) => {
   const { themeData } = useTheme();
+
   return (
     <div
       style={{
@@ -28,14 +28,12 @@ const InvoiceLayout: React.FC<InvoiceLayoutProps> = ({ children }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "start",
-          
         }}
       >
         <Header />
         <div
           style={{
             flex: 1,
-
           }}
         >
           <div
@@ -50,7 +48,6 @@ const InvoiceLayout: React.FC<InvoiceLayoutProps> = ({ children }) => {
             }}
           >
             {children}
-            <InvoicePreviewPanel />
           </div>
         </div>
       </div>

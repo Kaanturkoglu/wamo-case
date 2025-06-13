@@ -14,7 +14,7 @@ export const ThemeContext = createContext<ThemeContextProps | undefined>(undefin
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const getInitialTheme = (): ThemeName => {
     const storedTheme = localStorage.getItem("theme") as ThemeName | null;
-    return storedTheme === "light" ? "light" : "light"; 
+    return storedTheme === "dark" ? "dark" : "dark"; 
   };
 
   const [theme, setTheme] = useState<ThemeName>(getInitialTheme);

@@ -1,6 +1,6 @@
-import InvoicePartyItem from "../InvoicePreviewPartyItem";
+import InvoicePartyItem from "../InvoicePartyItem";
 
-const InvoiceParty = () => {
+const InvoiceParties = () => {
   return (
     <div
       style={{
@@ -34,4 +34,4 @@ const InvoiceParty = () => {
   );
 };
 
-export default InvoiceParty;
+export default InvoiceParties;

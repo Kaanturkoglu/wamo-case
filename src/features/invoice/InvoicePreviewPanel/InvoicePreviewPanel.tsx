@@ -1,21 +1,29 @@
 import Divider from "../../../components/common/Divider";
 import { useTheme } from "../../../hooks/useTheme";
-import InvoiceHeader from "../components/InvoicePreviewHeader";
-import InvoiceParty from "../components/InvoicePreviewParty/InvoiceParty";
+import Header from "../components/InvoicePreview/Header";
+import InvoiceParties from "../components/InvoicePreview/InvoiceParties/InvoiceParties";
+import type { InvoicePreviewPanelProps } from "./InvoicePreviewPanel.types";
+import dayjs from "dayjs";
 
-const InvoicePreviewPanel = () => {
+const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
   const { themeData } = useTheme();
+  const formattedIssueDate = data.issueDate
+    ? dayjs(data.issueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
+    : "";
+  const formattedDueDate = data.dueDate
+    ? dayjs(data.dueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
+    : "";
   return (
     <div
       style={{
         height: "95%",
-        backgroundColor: "#e8e9ed",
+        backgroundColor: themeData.miniBackground,
         display: "flex",
         borderRadius: "10px",
-        width: "100%",
+        width: "50%",
+        minWidth: "660px",
         margin: "20px",
         padding: "20px",
-        overflow: "auto"
       }}
     >
       <div
@@ -24,20 +32,20 @@ const InvoicePreviewPanel = () => {
           borderRadius: "10px",
           backgroundColor: themeData.primary,
           display: "flex",
-          width: "50%",
           height: "100%",
           flexDirection: "column",
           justifyContent: "start",
           alignItems: "start",
-          overflow: "auto",
+          overflowY: "auto",
+          overflowX: "hidden",
           padding: "20px",
         }}
       >
-        <InvoiceHeader
-          issueDate={"04.01.2024"}
-          dueDate={"04.01.2024"}
+        <Header
+          issueDate={formattedIssueDate}
+          dueDate={formattedDueDate}
           invoiceNumber={"#INV-71"}
-        ></InvoiceHeader>
+        ></Header>
         <Divider
           orientation="horizontal"
           color="#b4b5b7"
@@ -47,7 +55,7 @@ const InvoicePreviewPanel = () => {
           opacity={0.5}
           style={{ marginBottom: "20px" }}
         ></Divider>
-        <InvoiceParty></InvoiceParty>
+        <InvoiceParties></InvoiceParties>
         <Divider
           orientation="horizontal"
           color="#b4b5b7"
