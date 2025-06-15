@@ -1,12 +1,12 @@
-import type { DueDateButtonProps } from "./DueDateButton.types";
-import { fonts } from "../../../../../constants/fonts";
-import { useTheme } from "../../../../../hooks/useTheme";
+import type { OptionButtonProps } from "./OptionButton.types";
+import { fonts } from "../../../constants/fonts"; 
+import { useTheme } from "../../../hooks/useTheme";
 
-const DueDateButton = ({
+const OptionButton = ({
   value,
   onClick,
   isSelected = false,
-}: DueDateButtonProps) => {
+}: OptionButtonProps) => {
   const { themeData } = useTheme();
 
   return (
@@ -39,4 +39,4 @@ const DueDateButton = ({
   );
 };
 
-export default DueDateButton;
+export default OptionButton;

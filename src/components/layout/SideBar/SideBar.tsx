@@ -1,6 +1,6 @@
 import type { SideBarProps } from "./SideBar.types";
 import { useState } from "react";
-import SideBarItem from "../../../components/navigation/SideBarItem";
+import SideBarItem from "../../navigation/SideBarItem";
 import { useTheme } from "../../../hooks/useTheme";
 import logo from "../../../assets/wamoLogo.png";
 import greenLogo from "../../../assets/wamoLogoGreenSmall.png";
@@ -11,7 +11,7 @@ import { fonts } from "../../../constants/fonts";
 
 const SideBar = ({ initials }: SideBarProps) => {
   const { theme, themeData } = useTheme();
-  const [selectedItem, setSelectedItem] = useState<string>("Pending Scans");
+  const [selectedItem, setSelectedItem] = useState<string>("Create Invoice");
 
   const handleItemSelect = (text: string) => {
     setSelectedItem(text);

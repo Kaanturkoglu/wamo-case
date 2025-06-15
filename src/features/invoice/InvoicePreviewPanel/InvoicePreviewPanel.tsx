@@ -22,7 +22,7 @@ const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
         backgroundColor: themeData.miniBackground,
         display: "flex",
         borderRadius: "10px",
-        width: "50%",
+        width: "60%",
         minWidth: "660px",
         margin: "20px",
         padding: "20px",
@@ -58,6 +58,7 @@ const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
             opacity={0.5}
             style={{ marginBottom: "20px" }}
           ></Divider>
+
           <InvoiceParties></InvoiceParties>
           <Divider
             orientation="horizontal"

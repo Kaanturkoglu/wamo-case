@@ -1,26 +1,32 @@
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch, type UseFormReturn } from "react-hook-form";
 import type { InvoiceFormValues } from "../types/invoice.ts";
 
 const todayStr = new Date().toISOString().slice(0, 10);
-const defaultDue = new Date(Date.now() + 15 * 24 * 60 * 60 * 1000)
-  .toISOString()
-  .slice(0, 10);
+
+let formInstance: UseFormReturn<InvoiceFormValues> | null = null;
 
 export function useInvoiceForm() {
-  const form = useForm<InvoiceFormValues>({
-    defaultValues: {
-      issueDate: todayStr,
-      dueDate: defaultDue,
-    },
-    mode: "onChange",
-  });
+  if (!formInstance) {
+    formInstance = useForm<InvoiceFormValues>({
+      defaultValues: {
+        issueDate: todayStr,
+        dueDate: new Date().toISOString().slice(0, 10),
+        items: []
+      },
+      mode: "onChange",
+    });
+  }
 
   const watched = useWatch({
-    control: form.control,
+    control: formInstance.control,
   });
 
   return {
-    form,
+    form: formInstance,
     watched,
   };
+}
+
+export function resetInvoiceForm() {
+  formInstance = null;
 }

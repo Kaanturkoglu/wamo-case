@@ -1,25 +1,24 @@
-import { useFormContext } from "react-hook-form";
-import { useTheme } from "../../../../../hooks/useTheme";
-import type { InvoiceFormValues } from "../../../../../types/invoice";
+import { useTheme } from "../../../../../../hooks/useTheme";
+import { useInvoiceForm } from "../../../../../../hooks/useInvoiceForm";
 import { useRef, useState, useEffect } from "react";
-import { fonts } from "../../../../../constants/fonts";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
-import DueDateButton from "../DueDateButton";
+import OptionButton from "../../../../../../components/common/OptionButton";
+import FormFieldHeader from "../../FormFieldHeader";
 
 type DueDateOption = "On Receipt" | "15 Days" | "30 Days" | "Custom";
 
 const FormDueDateField = () => {
   const { themeData } = useTheme();
+  const { form, watched } = useInvoiceForm();
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const { register, setValue, watch } = useFormContext<InvoiceFormValues>();
 
   const [selectedOption, setSelectedOption] =
     useState<DueDateOption>("15 Days");
   const [showCustomPicker, setShowCustomPicker] = useState(false);
 
-  const issueDate = watch("issueDate");
-  const dueDate = watch("dueDate");
+  const issueDate = watched.issueDate;
+  const dueDate = watched.dueDate;
 
   const calculateDueDate = (
     option: DueDateOption,
@@ -35,7 +34,7 @@ const FormDueDateField = () => {
 
     switch (option) {
       case "On Receipt":
-        return issueDate; 
+        return issueDate;
       case "15 Days":
         return new Date(issueDateObj.getTime() + 15 * 24 * 60 * 60 * 1000)
           .toISOString()
@@ -52,9 +51,9 @@ const FormDueDateField = () => {
   useEffect(() => {
     if (selectedOption !== "Custom" && issueDate) {
       const newDueDate = calculateDueDate(selectedOption);
-      setValue("dueDate", newDueDate, { shouldValidate: true });
+      form.setValue("dueDate", newDueDate, { shouldValidate: true });
     }
-  }, [issueDate, selectedOption, setValue]);
+  }, [issueDate, selectedOption, form]);
 
   const handleOptionClick = (option: DueDateOption) => {
     setSelectedOption(option);
@@ -65,7 +64,7 @@ const FormDueDateField = () => {
       setShowCustomPicker(false);
       if (issueDate) {
         const newDueDate = calculateDueDate(option);
-        setValue("dueDate", newDueDate, { shouldValidate: true });
+        form.setValue("dueDate", newDueDate, { shouldValidate: true });
       }
     }
   };
@@ -75,32 +74,24 @@ const FormDueDateField = () => {
     dateString: string | string[]
   ) => {
     if (typeof dateString === "string" && dateString) {
-      setValue("dueDate", dateString, { shouldValidate: true });
+      form.setValue("dueDate", dateString, { shouldValidate: true });
       setShowCustomPicker(false);
     }
     if (Array.isArray(dateString) && dateString.length > 0) {
-      setValue("dueDate", dateString[0], { shouldValidate: true });
+      form.setValue("dueDate", dateString[0], { shouldValidate: true });
       setShowCustomPicker(false);
     }
   };
 
   return (
-    <div ref={wrapperRef} style={{ position: "relative" }}>
-      <input {...register("dueDate")} type="hidden" />
+    <div
+      ref={wrapperRef}
+      style={{ position: "relative", marginBottom: "20px" }}
+    >
+      <input {...form.register("dueDate")} type="hidden" />
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{
-            fontFamily: fonts.body,
-            fontWeight: fonts.boldWeight,
-            fontSize: fonts.medium,
-            color: themeData.text,
-            marginBottom: "8px",
-          }}
-        >
-          Due Date
-        </div>
-
+        <FormFieldHeader title="Due Date" />
         <div
           style={{
             height: "80px",
@@ -115,28 +106,27 @@ const FormDueDateField = () => {
             gap: "8px",
           }}
         >
-          <DueDateButton
+          <OptionButton
             value="On Receipt"
             onClick={() => handleOptionClick("On Receipt")}
             isSelected={selectedOption === "On Receipt"}
           />
-          <DueDateButton
+          <OptionButton
             value="15 Days"
             onClick={() => handleOptionClick("15 Days")}
             isSelected={selectedOption === "15 Days"}
           />
-          <DueDateButton
+          <OptionButton
             value="30 Days"
             onClick={() => handleOptionClick("30 Days")}
             isSelected={selectedOption === "30 Days"}
           />
-          <DueDateButton
+          <OptionButton
             value="Custom"
             onClick={() => handleOptionClick("Custom")}
             isSelected={selectedOption === "Custom"}
           />
         </div>
-
       </div>
       <DatePicker
         open={showCustomPicker}

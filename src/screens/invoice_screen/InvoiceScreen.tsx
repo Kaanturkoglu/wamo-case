@@ -9,6 +9,7 @@ const InvoiceScreen = () => {
   const [invoiceData, setInvoiceData] = React.useState<InvoiceFormValues>({
     issueDate: "",
     dueDate: "",
+    items: [],
   });
 
   return (
@@ -17,7 +18,6 @@ const InvoiceScreen = () => {
         display: "flex",
         height: "100%",
         width: "100%",
-        backgroundColor: "blue",
         justifyContent: "start",
         alignItems: "start",
         overflowY: "auto",

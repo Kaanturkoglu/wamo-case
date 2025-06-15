@@ -1,20 +1,20 @@
 import React, { useState, useRef } from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
-import { useFormContext } from "react-hook-form";
-import { fonts } from "../../../../../constants/fonts";
-import { useTheme } from "../../../../../hooks/useTheme";
-import dateIconPurple from "../../../../../assets/datePickIcon.png";
-import dateIconGreen from "../../../../../assets/datePickIconGreen.png";
-import type { InvoiceFormValues } from "../../../../../types/invoice";
+import { useInvoiceForm } from "../../../../../../hooks/useInvoiceForm";
+import { fonts } from "../../../../../../constants/fonts";
+import { useTheme } from "../../../../../../hooks/useTheme";
+import dateIconPurple from "../../../../../../assets/datePickIcon.png";
+import dateIconGreen from "../../../../../../assets/datePickIconGreen.png";
+import FormFieldHeader from "../../FormFieldHeader";
 
 const FormIssueField: React.FC = () => {
   const { theme, themeData } = useTheme();
+  const { form, watched } = useInvoiceForm();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  const { register, setValue, watch } = useFormContext<InvoiceFormValues>();
-  const selectedDate = watch("issueDate");
+  const selectedDate = watched.issueDate;
   const formattedDate = selectedDate
     ? selectedDate === dayjs().format("YYYY-MM-DD")
       ? "Today"
@@ -26,19 +26,10 @@ const FormIssueField: React.FC = () => {
       ref={wrapperRef}
       style={{ position: "relative", marginBottom: "20px" }}
     >
-      <input {...register("issueDate")} type="hidden" />
+      <input {...form.register("issueDate")} type="hidden" />
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <div
-          style={{
-            fontFamily: fonts.body,
-            fontWeight: fonts.boldWeight,
-            fontSize: fonts.medium,
-            color: themeData.text,
-            marginBottom: "8px",
-          }}
-        >
-          Issue Date
-        </div>
+        <FormFieldHeader title="Issue date" />
+
         <div
           style={{
             height: "80px",
@@ -108,8 +99,12 @@ const FormIssueField: React.FC = () => {
         onOpenChange={setOpen}
         onChange={(_, dateString) => {
           if (typeof dateString === "string" && dateString) {
-            setValue("issueDate", dateString, { shouldValidate: true });
+            form.setValue("issueDate", dateString, { shouldValidate: true });
           }
+        }}
+        disabledDate={(current) => {
+          if (!current) return false;
+          return current.isBefore(dayjs(), "day");
         }}
         style={{
           position: "absolute",

@@ -1,12 +1,13 @@
 export interface InvoiceItem {
-  description: string;
+  title: string;
   quantity: number;
   price: number;
-  vat: number; 
+  vatRate: number; 
+  currency: string;
 }
 
 export interface InvoiceFormValues {
   issueDate: string;           
   dueDate: string;        
-  //TODO     
+  items: InvoiceItem[];
 }

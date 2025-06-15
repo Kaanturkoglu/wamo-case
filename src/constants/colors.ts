@@ -17,7 +17,7 @@ export const darkTheme = {
   text: "#e7e8ec",
   border: "#0b0b0b",
   gray: "#b4b5b7",
-  pickColor: "#7bd1bf",
+  pickColor: "#2c9165",
   pickColorBg: "#d4faed",
   miniBackground: "#252429"
 };

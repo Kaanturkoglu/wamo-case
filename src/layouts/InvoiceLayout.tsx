@@ -1,6 +1,6 @@
 import React from "react";
-import SideBar from "../features/layout/SideBar";
-import Header from "../features/layout/Header/Header";
+import SideBar from "../components/layout/SideBar";
+import Header from "../components/layout/Header/Header";
 import { useTheme } from "../hooks/useTheme";
 
 interface InvoiceLayoutProps {
@@ -41,7 +41,7 @@ const InvoiceLayout: React.FC<InvoiceLayoutProps> = ({ children }) => {
               display: "flex",
               flexDirection: "row",
               width: "100%",
-              height: "100%",
+              height: "calc(100vh - 60px)",
               justifyContent: "space-between",
               alignItems: "center",
               flex: 1,

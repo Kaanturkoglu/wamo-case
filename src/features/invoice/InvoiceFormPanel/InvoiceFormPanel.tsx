@@ -1,10 +1,12 @@
 import React from "react";
 import { useInvoiceForm } from "../../../hooks/useInvoiceForm";
 import InvoiceFormHeader from "../components/InvoiceForm/InvoiceFormHeader";
-import FormIssueField from "../components/InvoiceForm/FormIssueField";
+import FormIssueField from "../components/InvoiceForm/Fields/FormIssueField";
 import type { InvoiceFormPanelProps } from "./InvoiceFormPanel.types";
 import { FormProvider } from "react-hook-form";
-import FormDueDateField from "../components/InvoiceForm/FormDueDateField/FormDueDateField";
+import FormDueDateField from "../components/InvoiceForm/Fields/FormDueDateField/FormDueDateField";
+import ItemsField from "../components/InvoiceForm/Fields/ItemsField/ItemsField";
+import ApplyButton from "../../../components/common/ApplyButton/ApplyButton";
 
 const InvoiceFormPanel = ({ onFormChange }: InvoiceFormPanelProps) => {
   const { form, watched } = useInvoiceForm();
@@ -20,7 +22,7 @@ const InvoiceFormPanel = ({ onFormChange }: InvoiceFormPanelProps) => {
           height: "95%",
           display: "flex",
           borderRadius: "10px",
-          width: "30%",
+          width: "40%",
           minWidth: "500px",
           margin: "20px",
           padding: "20px",
@@ -31,6 +33,12 @@ const InvoiceFormPanel = ({ onFormChange }: InvoiceFormPanelProps) => {
         <InvoiceFormHeader invoiceId="#INV-71"></InvoiceFormHeader>
         <FormIssueField></FormIssueField>
         <FormDueDateField></FormDueDateField>
+        <ItemsField type="plain"></ItemsField>
+        <ApplyButton
+          text="Continue"
+          disabled={false}
+          onClick={() => {}}
+        ></ApplyButton>
       </form>
     </FormProvider>
   );
