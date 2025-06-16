@@ -1,24 +1,24 @@
 import { useTheme } from "../../../../../../hooks/useTheme";
-import { useInvoiceForm } from "../../../../../../hooks/useInvoiceForm";
 import { useRef, useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
 import OptionButton from "../../../../../../components/common/OptionButton";
 import FormFieldHeader from "../../FormFieldHeader";
+import { useInvoiceForm } from "../../../../../../context/InvoiceFormContext";
 
 type DueDateOption = "On Receipt" | "15 Days" | "30 Days" | "Custom";
 
 const FormDueDateField = () => {
   const { themeData } = useTheme();
-  const { form, watched } = useInvoiceForm();
+  const { form, formData } = useInvoiceForm();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [selectedOption, setSelectedOption] =
     useState<DueDateOption>("15 Days");
   const [showCustomPicker, setShowCustomPicker] = useState(false);
 
-  const issueDate = watched.issueDate;
-  const dueDate = watched.dueDate;
+  const issueDate = formData.issueDate;
+  const dueDate = formData.dueDate;
 
   const calculateDueDate = (
     option: DueDateOption,

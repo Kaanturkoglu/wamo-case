@@ -1,20 +1,20 @@
 import React, { useState, useRef } from "react";
 import { DatePicker } from "antd";
 import dayjs from "dayjs";
-import { useInvoiceForm } from "../../../../../../hooks/useInvoiceForm";
 import { fonts } from "../../../../../../constants/fonts";
 import { useTheme } from "../../../../../../hooks/useTheme";
 import dateIconPurple from "../../../../../../assets/datePickIcon.png";
 import dateIconGreen from "../../../../../../assets/datePickIconGreen.png";
 import FormFieldHeader from "../../FormFieldHeader";
+import { useInvoiceForm } from "../../../../../../context/InvoiceFormContext";
 
 const FormIssueField: React.FC = () => {
   const { theme, themeData } = useTheme();
-  const { form, watched } = useInvoiceForm();
+  const { form, formData } = useInvoiceForm();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  const selectedDate = watched.issueDate;
+  const selectedDate = formData.issueDate;
   const formattedDate = selectedDate
     ? selectedDate === dayjs().format("YYYY-MM-DD")
       ? "Today"

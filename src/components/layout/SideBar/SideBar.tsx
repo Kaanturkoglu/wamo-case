@@ -8,6 +8,7 @@ import invoiceButtonPurple from "../../../assets/invoiceButtonPurple.png";
 import invoiceButtonGreen from "../../../assets/invoiceButtonGreen.png";
 
 import { fonts } from "../../../constants/fonts";
+import ThemeSelectButton from "../../common/ThemeSelectButton/ThemeSelectButton";
 
 const SideBar = ({ initials }: SideBarProps) => {
   const { theme, themeData } = useTheme();
@@ -43,6 +44,7 @@ const SideBar = ({ initials }: SideBarProps) => {
         flexDirection: "column",
         height: "100vh",
         width: "80px",
+        minWidth: "80px",
         boxShadow: "0",
         backgroundColor: themeData.primary,
         borderRight: `1px solid ${themeData.border}`,
@@ -100,6 +102,7 @@ const SideBar = ({ initials }: SideBarProps) => {
           ))}
         </div>
       </div>
+      <ThemeSelectButton />
       <div
         style={{
           display: "flex",

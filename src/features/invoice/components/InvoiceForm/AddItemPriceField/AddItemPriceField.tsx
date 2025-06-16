@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useTheme } from "../../../../../hooks/useTheme";
 import { fonts } from "../../../../../constants/fonts";
 import {
@@ -6,10 +5,28 @@ import {
   currencySymbols,
   type Currency,
 } from "../../../../../types/currency";
+import type { AddItemPriceFieldProps } from "./AddItemPriceField.types";
 
-const AddItemInputField = () => {
-  const [selectedCurrency, setSelectedCurrency] = useState<Currency>("EUR");
+const AddItemPriceField = ({
+  price,
+  setPrice,
+  currency,
+  setCurrency,
+}: AddItemPriceFieldProps) => {
   const { themeData } = useTheme();
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Allow empty string, numbers, and decimal points
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setPrice(value);
+    }
+  };
+
+  const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newCurrency = e.target.value as Currency;
+    setCurrency(newCurrency);
+  };
 
   return (
     <div
@@ -17,6 +34,7 @@ const AddItemInputField = () => {
         display: "flex",
         padding: "16px",
         marginTop: "12px",
+        marginBottom: "16px",
         flexDirection: "row",
         height: "70px",
         width: "100%",
@@ -34,8 +52,9 @@ const AddItemInputField = () => {
           fontSize: fonts.xLarge,
         }}
       >
-        {currencySymbols[selectedCurrency]}
+        {currencySymbols[currency as Currency]}
       </div>
+
       <input
         style={{
           width: "100%",
@@ -50,9 +69,12 @@ const AddItemInputField = () => {
           marginRight: "8px",
           marginLeft: "8px",
         }}
-        type="number"
+        type="text"
         placeholder="0"
-      ></input>
+        onChange={handlePriceChange}
+        value={price}
+      />
+
       <div
         style={{
           display: "flex",
@@ -65,7 +87,7 @@ const AddItemInputField = () => {
         }}
       >
         <img
-          src={currencyIcons[selectedCurrency]}
+          src={currencyIcons[currency as Currency]}
           alt="Currency Icon"
           style={{
             height: "24px",
@@ -73,9 +95,10 @@ const AddItemInputField = () => {
             objectFit: "contain",
           }}
         />
+
         <select
-          value={selectedCurrency}
-          onChange={(e) => setSelectedCurrency(e.target.value as Currency)}
+          value={currency}
+          onChange={handleCurrencyChange}
           style={{
             fontFamily: fonts.body,
             color: themeData.text,
@@ -87,9 +110,9 @@ const AddItemInputField = () => {
             backgroundColor: themeData.primary,
           }}
         >
-          {Object.keys(currencySymbols).map((currency) => (
-            <option key={currency} value={currency}>
-              {currency}
+          {Object.keys(currencySymbols).map((currencyOption) => (
+            <option key={currencyOption} value={currencyOption}>
+              {currencyOption}
             </option>
           ))}
         </select>
@@ -98,4 +121,4 @@ const AddItemInputField = () => {
   );
 };
 
-export default AddItemInputField;
+export default AddItemPriceField;

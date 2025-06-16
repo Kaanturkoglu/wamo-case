@@ -4,6 +4,7 @@ import InvoiceFormPanel from "../../features/invoice/InvoiceFormPanel/InvoiceFor
 import InvoiceLayout from "../../layouts/InvoiceLayout";
 import type { InvoiceFormValues } from "../../types/invoice";
 import InvoicePreviewPanel from "../../features/invoice/InvoicePreviewPanel";
+import { InvoiceFormProvider } from "../../context/InvoiceFormContext/InvoiceFormContext";
 
 const InvoiceScreen = () => {
   const [invoiceData, setInvoiceData] = React.useState<InvoiceFormValues>({
@@ -25,20 +26,22 @@ const InvoiceScreen = () => {
       }}
     >
       <ThemeProvider>
-        <InvoiceLayout>
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <InvoiceFormPanel onFormChange={setInvoiceData}></InvoiceFormPanel>
-            <InvoicePreviewPanel data={invoiceData} />
-          </div>
-        </InvoiceLayout>
+        <InvoiceFormProvider>
+          <InvoiceLayout>
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <InvoiceFormPanel></InvoiceFormPanel>
+              <InvoicePreviewPanel />
+            </div>
+          </InvoiceLayout>
+        </InvoiceFormProvider>
       </ThemeProvider>
     </div>
   );

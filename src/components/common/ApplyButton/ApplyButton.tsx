@@ -2,7 +2,7 @@ import type { ApplyButtonProps } from "./ApplyButton.types";
 import { useTheme } from "../../../hooks/useTheme";
 import { fonts } from "../../../constants/fonts";
 
-const ApplyButton = ({ onClick, text, disabled }: ApplyButtonProps) => {
+const ApplyButton = ({ onClick, text, disabled, style }: ApplyButtonProps) => {
   const { themeData } = useTheme();
 
   return (
@@ -22,6 +22,8 @@ const ApplyButton = ({ onClick, text, disabled }: ApplyButtonProps) => {
         transition: "background-color 0.3s ease",
         width: "100%",
         height: "50px",
+        minHeight: "50px",
+        ...style,
       }}
       onClick={!disabled ? onClick : undefined}
     >

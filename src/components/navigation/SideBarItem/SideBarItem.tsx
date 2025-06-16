@@ -1,4 +1,3 @@
-import { Button } from "antd";
 import type { SideBarItemProps } from "./SideBarItem.types";
 import { useTheme } from "../../../hooks/useTheme";
 import { hexToRgb } from "../../../utils/hexToRgb";
@@ -22,7 +21,7 @@ const SideBarItem = ({ isSelected, onSelect, icon }: SideBarItemProps) => {
         cursor: "pointer",
       }}
     >
-      <Button
+      <div
         style={{
           width: "100%",
           display: "flex",
@@ -33,7 +32,6 @@ const SideBarItem = ({ isSelected, onSelect, icon }: SideBarItemProps) => {
           boxShadow: "none",
           backgroundColor: "transparent",
         }}
-        type="text"
       >
         <div
           style={{
@@ -48,7 +46,7 @@ const SideBarItem = ({ isSelected, onSelect, icon }: SideBarItemProps) => {
         >
           {icon}
         </div>
-      </Button>
+      </div>
     </div>
   );
 };

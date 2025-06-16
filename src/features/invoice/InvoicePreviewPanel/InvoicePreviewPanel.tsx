@@ -3,17 +3,20 @@ import Divider from "../../../components/common/Divider";
 import { useTheme } from "../../../hooks/useTheme";
 import Header from "../components/InvoicePreview/Header";
 import InvoiceParties from "../components/InvoicePreview/InvoiceParties/InvoiceParties";
-import type { InvoicePreviewPanelProps } from "./InvoicePreviewPanel.types";
 import dayjs from "dayjs";
 import NotesSection from "../components/InvoicePreview/NotesSection";
+import ItemDetails from "../components/InvoicePreview/ItemDetails";
+import { useInvoiceForm } from "../../../context/InvoiceFormContext";
 
-const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
+const InvoicePreviewPanel = () => {
   const { themeData } = useTheme();
-  const formattedIssueDate = data.issueDate
-    ? dayjs(data.issueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
+  const { formData } = useInvoiceForm();
+
+  const formattedIssueDate = formData.issueDate
+    ? dayjs(formData.issueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
     : "";
-  const formattedDueDate = data.dueDate
-    ? dayjs(data.dueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
+  const formattedDueDate = formData.dueDate
+    ? dayjs(formData.dueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
     : "";
   return (
     <div
@@ -58,7 +61,6 @@ const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
             opacity={0.5}
             style={{ marginBottom: "20px" }}
           ></Divider>
-
           <InvoiceParties></InvoiceParties>
           <Divider
             orientation="horizontal"
@@ -69,6 +71,7 @@ const InvoicePreviewPanel = ({ data }: InvoicePreviewPanelProps) => {
             opacity={0.5}
             style={{ marginTop: "20px" }}
           ></Divider>
+          <ItemDetails items={formData.items}></ItemDetails>
         </div>
         <div
           style={{

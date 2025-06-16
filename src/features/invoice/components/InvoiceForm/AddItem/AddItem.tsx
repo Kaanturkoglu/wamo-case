@@ -5,9 +5,93 @@ import boxIconDarkTheme from "../../../../../assets/boxIconDarkTheme.png";
 import type { AddItemProps } from "./AddItem.types";
 import AddItemPriceField from "../AddItemPriceField/AddItemPriceField";
 import FormFieldHeader from "../FormFieldHeader/";
+import QuantityAndTitleField from "../QuantityAndTitleField/QuantityAndTitleField";
+import ApplyButton from "../../../../../components/common/ApplyButton/ApplyButton";
+import VatRateSelector from "../VatRateSelector/VatRateSelector";
+import { useState } from "react";
+import { type Currency } from "../../../../../types/currency";
+import type { InvoiceItem } from "../../../../../types/invoice";
+import { useInvoiceForm } from "../../../../../context/InvoiceFormContext";
 
 const AddItem = ({ onClick }: AddItemProps) => {
   const { theme, themeData } = useTheme();
+  const { form, formData } = useInvoiceForm();
+
+  const [title, setTitle] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [vatRate, setVatRate] = useState("");
+  const [currency, setCurrency] = useState<Currency>("EUR");
+  const [localErrors, setLocalErrors] = useState<Record<string, string>>({});
+
+  const validateItem = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!title.trim()) {
+      newErrors.title = "Description is required";
+    } else if (title.length > 30) {
+      newErrors.title = "Description must not exceed 30 characters";
+    }
+
+    const quantityNum = parseInt(quantity);
+    if (!quantity) {
+      newErrors.quantity = "Quantity is required";
+    } else if (isNaN(quantityNum) || quantityNum <= 0) {
+      newErrors.quantity = "Quantity must be a positive number";
+    }
+
+    const priceNum = parseFloat(price);
+    if (!price) {
+      newErrors.price = "Price is required";
+    } else if (isNaN(priceNum) || priceNum < 0) {
+      newErrors.price = "Price cannot be negative";
+    }
+
+    const vatNum = parseFloat(vatRate);
+    if (vatRate && (isNaN(vatNum) || vatNum < 0 || vatNum > 100)) {
+      newErrors.vatRate = "VAT rate must be between 0-100%";
+    }
+
+    setLocalErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleAdd = () => {
+    if (!validateItem()) {
+      return;
+    }
+
+    const newItem: InvoiceItem = {
+      title: title.trim(),
+      quantity: parseInt(quantity),
+      price: parseFloat(price),
+      vatRate: parseFloat(vatRate) || 0,
+      currency: currency,
+    };
+
+    const currentItems = formData.items || [];
+    const updatedItems = [...currentItems, newItem];
+
+    form.setValue("items", updatedItems, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+
+    setTitle("");
+    setQuantity("");
+    setPrice("");
+    setVatRate("");
+    setCurrency("EUR");
+    setLocalErrors({});
+
+    if (typeof onClick === "function") {
+      onClick();
+    }
+  };
+
+  const isFormValid =
+    title.trim() && quantity && price && Object.keys(localErrors).length === 0;
 
   return (
     <div
@@ -35,8 +119,8 @@ const AddItem = ({ onClick }: AddItemProps) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
+            marginBottom: "16px",
           }}
-          onClick={onClick}
         >
           <div
             style={{
@@ -44,7 +128,6 @@ const AddItem = ({ onClick }: AddItemProps) => {
               fontWeight: fonts.boldWeight,
               fontSize: fonts.large,
               color: themeData.text,
-              marginBottom: "4px",
               display: "flex",
               height: "100%",
               alignItems: "center",
@@ -65,7 +148,7 @@ const AddItem = ({ onClick }: AddItemProps) => {
           >
             <img
               src={theme === "light" ? boxIconLightTheme : boxIconDarkTheme}
-              alt="Date Pick"
+              alt="Add Item"
               style={{
                 height: "26px",
                 width: "26px",
@@ -74,7 +157,24 @@ const AddItem = ({ onClick }: AddItemProps) => {
             />
           </div>
         </div>
-        <AddItemPriceField></AddItemPriceField>
+        <AddItemPriceField
+          price={price}
+          setPrice={setPrice}
+          currency={currency}
+          setCurrency={setCurrency}
+        />
+        <QuantityAndTitleField
+          title={title}
+          setTitle={setTitle}
+          quantity={quantity}
+          setQuantity={setQuantity}
+        />
+        <VatRateSelector vatRate={vatRate} setVatRate={setVatRate} />
+        <ApplyButton
+          text="Add Item"
+          onClick={handleAdd}
+          disabled={!isFormValid}
+        />
       </div>
     </div>
   );
