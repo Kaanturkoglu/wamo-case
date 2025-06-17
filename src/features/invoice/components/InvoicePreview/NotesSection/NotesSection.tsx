@@ -4,7 +4,7 @@ import Note from "../Note";
 import PaymentDetails from "../PaymentDetails/PaymentDetails";
 
 const NotesSection = () => {
-  const { theme, themeData } = useTheme();
+  const { themeData } = useTheme();
   return (
     <div
       style={{
