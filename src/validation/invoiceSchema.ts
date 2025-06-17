@@ -38,6 +38,9 @@ export const invoiceFormSchema = z.object({
   items: z
     .array(invoiceItemSchema)
     .min(1, "At least one item is required"),
+  totalInclVAT: z
+    .number()
+    .nonnegative("Total including VAT cannot be negative")
 }).refine((data) => {
   const issueDate = new Date(data.issueDate);
   const dueDate = new Date(data.dueDate);

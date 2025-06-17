@@ -5,4 +5,6 @@ export type AddItemPriceFieldProps = {
     setPrice: (val: string) => void;
     currency: string;
     setCurrency: (val: Currency) => void;
+    disabled?: boolean;
+
 }

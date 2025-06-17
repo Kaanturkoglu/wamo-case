@@ -6,109 +6,71 @@ import {
   type Currency,
 } from "../../../../../types/currency";
 import type { AddItemPriceFieldProps } from "./AddItemPriceField.types";
+import styles from "../../../../../styles/components/forms/AddItemPriceField.module.css";
 
 const AddItemPriceField = ({
   price,
   setPrice,
   currency,
   setCurrency,
+  disabled = false,
 }: AddItemPriceFieldProps) => {
   const { themeData } = useTheme();
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // Allow empty string, numbers, and decimal points
     if (value === "" || /^\d*\.?\d*$/.test(value)) {
       setPrice(value);
     }
   };
 
   const handleCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newCurrency = e.target.value as Currency;
-    setCurrency(newCurrency);
+    if (!disabled) {
+      const newCurrency = e.target.value as Currency;
+      setCurrency(newCurrency);
+    }
   };
 
+  const cssVariables = {
+    "--price-field-bg": themeData.miniBackground,
+    "--price-field-selector-bg": themeData.primary,
+    "--price-field-text-color": themeData.text,
+    "--price-field-font-family": fonts.body,
+    "--price-field-font-weight-bold": fonts.boldWeight,
+    "--price-field-font-size-xlarge": fonts.xLarge,
+    "--price-field-font-size-medium": fonts.medium,
+    "--price-field-cursor": disabled ? "not-allowed" : "pointer",
+  } as React.CSSProperties;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        padding: "16px",
-        marginTop: "12px",
-        marginBottom: "16px",
-        flexDirection: "row",
-        height: "70px",
-        width: "100%",
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderRadius: "10px",
-        backgroundColor: themeData.miniBackground,
-      }}
-    >
-      <div
-        style={{
-          fontFamily: fonts.body,
-          color: themeData.text,
-          fontWeight: fonts.boldWeight,
-          fontSize: fonts.xLarge,
-        }}
-      >
+    <div className={styles.container} style={cssVariables}>
+      <div className={styles.currencySymbol}>
         {currencySymbols[currency as Currency]}
       </div>
 
       <input
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: themeData.miniBackground,
-          border: "none",
-          outline: "none",
-          fontFamily: fonts.body,
-          fontWeight: fonts.boldWeight,
-          fontSize: fonts.xLarge,
-          color: themeData.text,
-          marginRight: "8px",
-          marginLeft: "8px",
-        }}
+        name="price-field"
+        id="price-field"
+        autoComplete="off"
+        className={styles.input}
         type="text"
         placeholder="0"
         onChange={handlePriceChange}
         value={price}
       />
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "row",
-          gap: "4px",
-          borderRadius: "30px",
-          padding: "4px",
-          backgroundColor: themeData.primary,
-        }}
-      >
+      <div className={styles.currencySelector}>
         <img
           src={currencyIcons[currency as Currency]}
           alt="Currency Icon"
-          style={{
-            height: "24px",
-            width: "24px",
-            objectFit: "contain",
-          }}
+          className={styles.currencyIcon}
         />
 
         <select
           value={currency}
           onChange={handleCurrencyChange}
-          style={{
-            fontFamily: fonts.body,
-            color: themeData.text,
-            border: "none",
-            fontSize: fonts.medium,
-            fontWeight: fonts.boldWeight,
-            cursor: "pointer",
-            outline: "none",
-            backgroundColor: themeData.primary,
-          }}
+          disabled={disabled}
+          className={styles.select}
         >
           {Object.keys(currencySymbols).map((currencyOption) => (
             <option key={currencyOption} value={currencyOption}>

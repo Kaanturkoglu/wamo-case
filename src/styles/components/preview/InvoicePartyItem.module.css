@@ -1,0 +1,82 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 300px;
+  padding-right: 12px;
+}
+
+.title {
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-small);
+  font-weight: var(--party-font-weight-medium);
+  color: var(--party-gray-color);
+}
+
+.companyName {
+  margin-bottom: 4px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-large);
+  font-weight: var(--party-font-weight-bold);
+  color: var(--party-text-color);
+}
+
+.companyCode {
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-small);
+  font-weight: var(--party-font-weight-medium);
+  color: var(--party-gray-color);
+}
+
+.addressLine {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-small);
+  font-weight: var(--party-font-weight-bold);
+  color: var(--party-gray-color);
+}
+
+.addressLine2 {
+  margin-bottom: 2px;
+}
+
+.email {
+  margin-bottom: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-small);
+  font-weight: var(--party-font-weight-bold);
+  color: var(--party-gray-color);
+}
+
+.phone {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--party-font-family);
+  font-size: var(--party-font-size-small);
+  font-weight: var(--party-font-weight-bold);
+  color: var(--party-gray-color);
+}

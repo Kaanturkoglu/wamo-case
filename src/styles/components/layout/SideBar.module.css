@@ -1,0 +1,76 @@
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 80px;
+  min-width: 80px;
+  box-shadow: 0;
+  justify-content: space-between;
+  align-items: center;
+  
+  background-color: var(--sidebar-bg-color);
+  border-right: var(--sidebar-border);
+}
+
+.topSection {
+  flex: 1;
+  padding-top: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.logoContainer {
+  cursor: pointer;
+  padding: 4px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+}
+
+.logoContainer:hover {
+  transform: scale(1.05);
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.invoiceIcon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.userAvatar {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* Use CSS custom properties for dynamic values */
+  background-color: var(--avatar-bg-color);
+  font-family: var(--avatar-font-family);
+  font-size: var(--avatar-font-size);
+  font-weight: var(--avatar-font-weight);
+  color: var(--avatar-text-color);
+}
+
+.userAvatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

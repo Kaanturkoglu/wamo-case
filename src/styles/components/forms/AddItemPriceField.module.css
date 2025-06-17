@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  padding: 16px;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  flex-direction: row;
+  height: 70px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  
+  background-color: var(--price-field-bg);
+}
+
+.currencySymbol {
+  font-family: var(--price-field-font-family);
+  color: var(--price-field-text-color);
+  font-weight: var(--price-field-font-weight-bold);
+  font-size: var(--price-field-font-size-xlarge);
+}
+
+.input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  margin-right: 8px;
+  margin-left: 8px;
+  
+  background-color: var(--price-field-bg);
+  font-family: var(--price-field-font-family);
+  font-weight: var(--price-field-font-weight-bold);
+  font-size: var(--price-field-font-size-xlarge);
+  color: var(--price-field-text-color);
+}
+
+.currencySelector {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 4px;
+  border-radius: 30px;
+  padding: 4px;
+  
+  background-color: var(--price-field-selector-bg);
+}
+
+.currencyIcon {
+  height: 24px;
+  width: 24px;
+  object-fit: contain;
+}
+
+.select {
+  border: none;
+  outline: none;
+  
+  font-family: var(--price-field-font-family);
+  color: var(--price-field-text-color);
+  font-size: var(--price-field-font-size-medium);
+  font-weight: var(--price-field-font-weight-bold);
+  cursor: var(--price-field-cursor);
+  background-color: var(--price-field-selector-bg);
+}

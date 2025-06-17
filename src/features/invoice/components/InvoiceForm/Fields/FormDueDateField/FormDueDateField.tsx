@@ -88,7 +88,7 @@ const FormDueDateField = () => {
       ref={wrapperRef}
       style={{ position: "relative", marginBottom: "20px" }}
     >
-      <input {...form.register("dueDate")} type="hidden" />
+      <input  {...form.register("dueDate")} type="hidden" />
 
       <div style={{ display: "flex", flexDirection: "column" }}>
         <FormFieldHeader title="Due Date" />

@@ -10,4 +10,5 @@ export interface InvoiceFormValues {
   issueDate: string;           
   dueDate: string;        
   items: InvoiceItem[];
+  totalInclVAT: number;
 }

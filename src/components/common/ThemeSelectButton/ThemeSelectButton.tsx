@@ -1,6 +1,8 @@
+// src/components/common/ThemeSelectButton/ThemeSelectButton.tsx
 import { useTheme } from "../../../hooks/useTheme";
 import moonIcon from "../../../assets/moonIcon.png";
 import sunIcon from "../../../assets/sunIcon.png";
+import styles from "../../../styles/components/common/ThemeSelectButton.module.css";
 
 const ThemeSelectButton = () => {
   const { theme, toggleTheme } = useTheme();
@@ -10,64 +12,23 @@ const ThemeSelectButton = () => {
   };
 
   return (
-    <div
+    <div 
       onClick={handleThemeToggle}
-      style={{
-        width: "100%",
-        height: "50px",
-        cursor: "pointer",
-        borderRadius: "8px",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className={styles.container}
     >
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "8px",
-          borderWidth: "0px",
-          boxShadow: "none",
-          backgroundColor: "transparent",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.1)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-          }}
-        >
+      <div className={styles.wrapper}>
+        <div className={styles.iconContainer}>
           {theme === "light" ? (
             <img
               src={sunIcon}
               alt="Switch to Dark Mode"
-              style={{
-                width: "30px",
-                height: "30px",
-              }}
+              className={styles.icon}
             />
           ) : (
             <img
               src={moonIcon}
               alt="Switch to Light Mode"
-              style={{
-                width: "30px",
-                height: "30px",
-              }}
+              className={styles.icon}
             />
           )}
         </div>

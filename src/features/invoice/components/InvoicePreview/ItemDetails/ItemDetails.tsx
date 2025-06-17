@@ -15,6 +15,7 @@ const ItemDetails = ({ items }: ItemDetailsProps) => {
         width: "100%",
         justifyContent: "start",
         alignItems: "center",
+        marginBottom: "20px",
       }}
     >
       <ItemDetailsHeader />

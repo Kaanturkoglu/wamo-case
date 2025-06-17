@@ -26,6 +26,8 @@ const QuantityAndTitleField = ({
       }}
     >
       <input
+        name="quantity"
+        id="quantity"
         style={{
           width: "25%",
           height: "100%",
@@ -39,12 +41,18 @@ const QuantityAndTitleField = ({
           borderRadius: "10px",
           padding: "0 12px",
         }}
+        autoComplete="off"
         type="text"
         placeholder="Quantity"
-        onChange={(e) => setQuantity(e.target.value)}
+        onChange={(e) => {
+          const numericValue = e.target.value.replace(/[^0-9]/g, "");
+          setQuantity(numericValue);
+        }}
         value={quantity}
       />
       <input
+        name="title"
+        id="title"
         style={{
           width: "75%",
           height: "100%",
@@ -58,6 +66,7 @@ const QuantityAndTitleField = ({
           padding: "0 12px",
           borderRadius: "10px",
         }}
+        autoComplete="off"
         type="text"
         placeholder="Title"
         onChange={(e) => setTitle(e.target.value)}

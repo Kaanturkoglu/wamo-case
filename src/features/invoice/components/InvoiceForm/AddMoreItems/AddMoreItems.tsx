@@ -3,54 +3,28 @@ import plusIconLight from "../../../../../assets/plusIconLight.png";
 import plusIconDark from "../../../../../assets/plusIconDark.png";
 import { fonts } from "../../../../../constants/fonts";
 import type { AddMoreItemsProps } from "./AddMoreItems.types";
+import styles from "../../../../../styles/components/forms/AddMoreItems.module.css";
 
 const AddMoreItems = ({ onClick }: AddMoreItemsProps) => {
   const { theme, themeData } = useTheme();
+
+  const cssVariables = {
+    "--add-more-font-family": fonts.body,
+    "--add-more-font-size": fonts.medium,
+    "--add-more-font-weight": fonts.boldWeight,
+    "--add-more-color": themeData.pickColor,
+  } as React.CSSProperties;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        alignItems: "end",
-        cursor: "pointer",
-        marginTop: "8px",
-      }}
-      onClick={onClick}
-    >
-      <div
-        style={{
-          marginRight: "8px",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <div className={styles.container} onClick={onClick} style={cssVariables}>
+      <div className={styles.iconContainer}>
         <img
           src={theme === "light" ? plusIconLight : plusIconDark}
-          alt="Date Pick"
-          style={{
-            height: "24px",
-            width: "24px",
-            objectFit: "contain",
-          }}
+          alt="Add Items"
+          className={styles.icon}
         />
       </div>
-      <div
-        style={{
-          fontFamily: fonts.body,
-          fontSize: fonts.medium,
-          fontWeight: fonts.boldWeight,
-          color: themeData.pickColor,
-          textOverflow: "ellipsis",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-          marginBottom: "4px",
-          textDecoration: "underline",
-        }}
-      >
-        Add more items
-      </div>
+      <div className={styles.text}>Add more items</div>
     </div>
   );
 };

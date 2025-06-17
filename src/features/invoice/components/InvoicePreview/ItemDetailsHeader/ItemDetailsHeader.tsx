@@ -1,89 +1,26 @@
+// src/components/invoice/ItemDetailsHeader/ItemDetailsHeader.tsx
 import { fonts } from "../../../../../constants/fonts";
 import { useTheme } from "../../../../../hooks/useTheme";
+import styles from "../../../../../styles/components/preview/ItemDetailsHeader.module.css";
 
 const ItemDetailsHeader = () => {
   const { themeData } = useTheme();
+
+  const cssVariables = {
+    "--details-header-font-family": fonts.body,
+    "--details-header-font-size": fonts.small,
+    "--details-header-font-weight": fonts.boldWeight,
+    "--details-header-color": themeData.gray,
+  } as React.CSSProperties;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        width: "100%",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          width: "30%",
-          fontFamily: fonts.body,
-          fontSize: fonts.small,
-          fontWeight: fonts.boldWeight,
-          color: themeData.gray,
-          textOverflow: "ellipsis",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Description
-      </div>
-      <div style={{ display: "flex", flexDirection: "row", width: "60%" }}>
-        <div
-          style={{
-            width: "25%",
-            fontFamily: fonts.body,
-            fontSize: fonts.small,
-            fontWeight: fonts.boldWeight,
-            color: themeData.gray,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Qty
-        </div>
-        <div
-          style={{
-            width: "25%",
-            fontFamily: fonts.body,
-            fontSize: fonts.small,
-            fontWeight: fonts.boldWeight,
-            color: themeData.gray,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-          }}
-        >
-          Unit price
-        </div>
-        <div
-          style={{
-            width: "25%",
-            fontFamily: fonts.body,
-            fontSize: fonts.small,
-            fontWeight: fonts.boldWeight,
-            color: themeData.gray,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-          }}
-        >
-          VAT (%)
-        </div>
-        <div
-          style={{
-            width: "25%",
-            fontFamily: fonts.body,
-            fontSize: fonts.small,
-            fontWeight: fonts.boldWeight,
-            color: themeData.gray,
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textAlign: "right",
-          }}
-        >
+    <div className={styles.container} style={cssVariables}>
+      <div className={styles.description}>Description</div>
+      <div className={styles.rightSection}>
+        <div className={styles.column}>Qty</div>
+        <div className={styles.column}>Unit price</div>
+        <div className={styles.column}>VAT (%)</div>
+        <div className={`${styles.column} ${styles.totalColumn}`}>
           Total excl. VAT
         </div>
       </div>

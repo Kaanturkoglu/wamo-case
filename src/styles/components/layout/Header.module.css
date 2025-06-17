@@ -1,0 +1,79 @@
+
+.header {
+  display: flex;
+  height: 60px;
+  min-height: 60px;
+  width: 100%;
+  flex-direction: column;
+  text-overflow: ellipsis;
+  position: static;
+  
+  background-color: var(--header-bg-color);
+  border-bottom: var(--header-border);
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+
+.crossIcon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.crossIcon:hover {
+  transform: scale(1.1);
+}
+
+.invoiceText {
+  padding-left: 10px;
+  
+  /* Use CSS custom properties for dynamic values */
+  color: var(--header-text-gray);
+  font-weight: var(--header-font-weight-medium);
+  font-size: var(--header-font-size-medium);
+  font-family: var(--header-font-family);
+}
+
+.separator {
+  padding-left: 8px;
+  
+  /* Use CSS custom properties for dynamic values */
+  color: var(--header-text-gray);
+  font-weight: var(--header-font-weight-medium);
+  font-size: var(--header-font-size-large);
+  font-family: var(--header-font-family);
+}
+
+.invoiceId {
+  padding-left: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  white-space: nowrap;
+  
+  /* Use CSS custom properties for dynamic values */
+  color: var(--header-text-primary);
+  font-size: var(--header-font-size-medium);
+  font-weight: var(--header-font-weight-bold);
+  font-family: var(--header-font-family);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 16px;
+  }
+  
+  .invoiceId {
+    max-width: 150px;
+  }
+}

@@ -7,8 +7,7 @@ export const useInvoiceForm = (): InvoiceFormContextType => {
   
   if (context === undefined) {
     throw new Error(
-      "useInvoiceForm must be used within an InvoiceFormProvider. " +
-      "Make sure your component is wrapped with <InvoiceFormProvider>"
+      "Err"
     );
   }
   

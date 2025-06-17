@@ -1,4 +1,3 @@
-// src/context/InvoiceFormContext/useInvoiceFormLogic.ts
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo } from "react";
@@ -14,17 +13,14 @@ export const useInvoiceFormLogic = (): InvoiceFormContextType => {
     mode: "onChange",
   });
 
-  // Watch all form values
   const formData = useWatch({
     control: form.control,
   }) as InvoiceFormValues;
 
-  // Memoize validation errors
   const errors = useMemo(() => {
     return validateFormData(formData);
   }, [formData]);
 
-  // Check if form is valid (both react-hook-form and custom validation)
   const isFormValid = useMemo(() => {
     return form.formState.isValid && Object.keys(errors).length === 0;
   }, [form.formState.isValid, errors]);

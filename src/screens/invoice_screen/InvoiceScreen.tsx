@@ -1,17 +1,11 @@
-import React from "react";
 import { ThemeProvider } from "../../context/ThemeContext";
 import InvoiceFormPanel from "../../features/invoice/InvoiceFormPanel/InvoiceFormPanel";
 import InvoiceLayout from "../../layouts/InvoiceLayout";
-import type { InvoiceFormValues } from "../../types/invoice";
 import InvoicePreviewPanel from "../../features/invoice/InvoicePreviewPanel";
 import { InvoiceFormProvider } from "../../context/InvoiceFormContext/InvoiceFormContext";
 
 const InvoiceScreen = () => {
-  const [invoiceData, setInvoiceData] = React.useState<InvoiceFormValues>({
-    issueDate: "",
-    dueDate: "",
-    items: [],
-  });
+
 
   return (
     <div

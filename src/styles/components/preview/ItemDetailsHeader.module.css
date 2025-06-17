@@ -1,0 +1,43 @@
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  display: flex;
+  width: 30%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--details-header-font-family);
+  font-size: var(--details-header-font-size);
+  font-weight: var(--details-header-font-weight);
+  color: var(--details-header-color);
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+}
+
+.column {
+  width: 25%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  font-family: var(--details-header-font-family);
+  font-size: var(--details-header-font-size);
+  font-weight: var(--details-header-font-weight);
+  color: var(--details-header-color);
+}
+
+.totalColumn {
+  text-align: right;
+}

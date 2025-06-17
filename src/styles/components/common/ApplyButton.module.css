@@ -1,0 +1,40 @@
+/* src/styles/components/common/ApplyButton.module.css */
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 50px;
+  min-height: 50px;
+  width: 100%;
+  border: none;
+  outline: none;
+  
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+}
+
+.button:hover:not(.button--disabled) {
+  background-color: var(--button-bg-color-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:active:not(.button--disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button--disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background-color: var(--button-bg-color-disabled) !important;
+}
+

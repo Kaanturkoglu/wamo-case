@@ -41,6 +41,8 @@ const ItemsSummary = () => {
 
     const totalInclVAT = totalExclVAT + totalVATAmount;
 
+    formData.totalInclVAT = totalInclVAT;
+
     return {
       totalExclVAT,
       totalVATAmount,

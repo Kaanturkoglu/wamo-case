@@ -3,81 +3,41 @@ import cross from "../../../assets/cross.png";
 import crossWhite from "../../../assets/crossWhite.png";
 import { fonts } from "../../../constants/fonts";
 import type { HeaderProps } from "./Header.types";
+import { useNavigate } from "react-router-dom";
+import styles from "../../../styles/components/layout/Header.module.css";
 
-const Header = ({invoiceId} : HeaderProps) => {
+const Header = ({ invoiceId }: HeaderProps) => {
   const { theme, themeData } = useTheme();
+  const navigate = useNavigate();
+
+  const handleCrossClick = () => {
+    navigate("/greeting");
+  };
+
+  const cssVariables = {
+    "--header-bg-color": themeData.primary,
+    "--header-border": `1px solid ${themeData.border}`,
+    "--header-text-gray": themeData.gray,
+    "--header-text-primary": themeData.text,
+    "--header-font-family": fonts.body,
+    "--header-font-weight-medium": fonts.mediumWeight,
+    "--header-font-weight-bold": fonts.boldWeight,
+    "--header-font-size-medium": fonts.medium,
+    "--header-font-size-large": fonts.large,
+  } as React.CSSProperties;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "60px",
-        minHeight: "60px",
-        width: "100%",
-        backgroundColor: themeData.primary,
-        flexDirection: "column",
-        textOverflow: "ellipsis",
-        borderBottom: `1px solid ${themeData.border}`,
-        position: "static",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "start",
-          padding: "0 20px",
-        }}
-      >
+    <div className={styles.header} style={cssVariables}>
+      <div className={styles.content}>
         <img
           src={theme == "light" ? cross : crossWhite}
-          alt="Cross Icon"
-          style={{
-            width: "24px",
-            height: "24px",
-            objectFit: "contain",
-            cursor: "pointer",
-          }}
-          onClick={() => {}}
+          alt="Close"
+          className={styles.crossIcon}
+          onClick={handleCrossClick}
         />
-        <div
-          style={{
-            color: themeData.gray,
-            fontWeight: fonts.mediumWeight,
-            fontSize: fonts.medium,
-            paddingLeft: "10px",
-            fontFamily: fonts.body,
-          }}
-        >
-          Invoice
-        </div>
-        <div
-          style={{
-            color: themeData.gray,
-            fontWeight: fonts.mediumWeight,
-            fontSize: fonts.large,
-            paddingLeft: "8px",
-            fontFamily: fonts.body,
-          }}
-        >
-          •
-        </div>
-        <div
-          style={{
-            color: themeData.text,
-            fontSize: fonts.medium,
-            fontWeight: fonts.boldWeight,
-            paddingLeft: "8px",
-            fontFamily: fonts.body,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            maxWidth: "200px",
-            whiteSpace: "nowrap",
-          }}
-        >
-          New invoice {invoiceId}
-        </div>
+        <div className={styles.invoiceText}>Invoice</div>
+        <div className={styles.separator}>•</div>
+        <div className={styles.invoiceId}>New invoice {invoiceId}</div>
       </div>
     </div>
   );

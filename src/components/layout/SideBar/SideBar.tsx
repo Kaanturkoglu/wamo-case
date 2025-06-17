@@ -1,22 +1,21 @@
 import type { SideBarProps } from "./SideBar.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import SideBarItem from "../../navigation/SideBarItem";
 import { useTheme } from "../../../hooks/useTheme";
 import logo from "../../../assets/wamoLogo.png";
 import greenLogo from "../../../assets/wamoLogoGreenSmall.png";
 import invoiceButtonPurple from "../../../assets/invoiceButtonPurple.png";
 import invoiceButtonGreen from "../../../assets/invoiceButtonGreen.png";
-
 import { fonts } from "../../../constants/fonts";
 import ThemeSelectButton from "../../common/ThemeSelectButton/ThemeSelectButton";
+import styles from "../../../styles/components/layout/SideBar.module.css";
 
 const SideBar = ({ initials }: SideBarProps) => {
   const { theme, themeData } = useTheme();
-  const [selectedItem, setSelectedItem] = useState<string>("Create Invoice");
-
-  const handleItemSelect = (text: string) => {
-    setSelectedItem(text);
-  };
+  const [selectedItem, setSelectedItem] = useState<string>("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const siderItems = [
     {
@@ -25,66 +24,57 @@ const SideBar = ({ initials }: SideBarProps) => {
         <img
           src={theme == "light" ? invoiceButtonPurple : invoiceButtonGreen}
           alt="Create Invoice"
-          style={{
-            width: "28px",
-            height: "28px",
-            objectFit: "contain",
-          }}
+          className={styles.invoiceIcon}
         />
       ),
-      path: "/create-invoice",
+      path: "/invoice",
       available: true,
     },
   ];
 
+  useEffect(() => {
+    const currentItem = siderItems.find(
+      (item) => item.path === location.pathname
+    );
+    if (currentItem) {
+      setSelectedItem(currentItem.text);
+    } else {
+      setSelectedItem("");
+    }
+  }, [location.pathname, theme]);
+
+  const handleItemSelect = (text: string) => {
+    const item = siderItems.find((item) => item.text === text);
+    if (item) {
+      navigate(item.path);
+      setSelectedItem(text);
+    }
+  };
+
+  const handleLogoClick = () => {
+    navigate("/greeting");
+    setSelectedItem("");
+  };
+
+  const cssVariables = {
+    "--sidebar-bg-color": themeData.primary,
+    "--sidebar-border": `1px solid ${themeData.border}`,
+    "--avatar-bg-color": themeData.miniBackground,
+    "--avatar-font-family": fonts.body,
+    "--avatar-font-size": fonts.medium,
+    "--avatar-font-weight": fonts.lightWeight,
+    "--avatar-text-color": themeData.text,
+  } as React.CSSProperties;
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        width: "80px",
-        minWidth: "80px",
-        boxShadow: "0",
-        backgroundColor: themeData.primary,
-        borderRight: `1px solid ${themeData.border}`,
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          flex: "1",
-          paddingTop: "10px",
-          justifyContent: "start",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          overflowY: "auto",
-        }}
-      >
+    <div className={styles.sidebar} style={cssVariables}>
+      <div className={styles.topSection}>
         <div>
-          <div
-            onClick={() => {}}
-            style={{
-              cursor: "pointer",
-              padding: "4px 0",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "10px",
-            }}
-          >
+          <div onClick={handleLogoClick} className={styles.logoContainer}>
             <img
               src={theme == "light" ? logo : greenLogo}
               alt="Logo"
-              style={{
-                width: "40px",
-                height: "40px",
-                objectFit: "contain",
-              }}
+              className={styles.logo}
             />
           </div>
           {siderItems.map(({ text, icon, available }) => (
@@ -94,7 +84,6 @@ const SideBar = ({ initials }: SideBarProps) => {
               onSelect={() => {
                 if (available) {
                   handleItemSelect(text);
-                } else {
                 }
               }}
               icon={icon}
@@ -103,28 +92,7 @@ const SideBar = ({ initials }: SideBarProps) => {
         </div>
       </div>
       <ThemeSelectButton />
-      <div
-        style={{
-          display: "flex",
-          width: "40px",
-          height: "40px",
-          borderRadius: "50%",
-          backgroundColor: themeData.miniBackground,
-          alignItems: "center",
-          justifyContent: "center",
-          alignContent: "center",
-          justifyItems: "center",
-          marginBottom: "20px",
-          fontFamily: fonts.body,
-          fontSize: fonts.medium,
-          fontWeight: fonts.lightWeight,
-          color: themeData.text,
-          cursor: "pointer",
-        }}
-        onClick={() => {}}
-      >
-        {initials}
-      </div>
+      <div className={styles.userAvatar}>{initials}</div>
     </div>
   );
 };

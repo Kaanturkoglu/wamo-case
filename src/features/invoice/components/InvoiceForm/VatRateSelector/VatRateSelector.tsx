@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { VatRateSelectorProps } from "./VatRateSelector.types";
 import { fonts } from "../../../../../constants/fonts";
 import { useTheme } from "../../../../../hooks/useTheme";
+import styles from "../../../../../styles/components/forms/VatRateSelector.module.css";
 
 type VatOption = "0%" | "10%" | "20%" | "Custom";
 
@@ -33,21 +34,20 @@ const VatRateSelector = ({ setVatRate }: VatRateSelectorProps) => {
     }
   };
 
+  const cssVariables = {
+    "--vat-font-family": fonts.body,
+    "--vat-font-size-medium": fonts.medium,
+    "--vat-font-size-large": fonts.large,
+    "--vat-font-weight-medium": fonts.mediumWeight,
+    "--vat-font-weight-bold": fonts.boldWeight,
+    "--vat-pick-color": themeData.pickColor,
+    "--vat-pick-color-bg": themeData.pickColorBg,
+  } as React.CSSProperties;
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div className={styles.container} style={cssVariables}>
       <FormFieldHeader title="VAT Rate" />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "start",
-          alignItems: "center",
-          width: "100%",
-          marginTop: "8px",
-          marginBottom: "16px",
-          gap: "8px",
-        }}
-      >
+      <div className={styles.optionsContainer}>
         <OptionButton
           value="0%"
           onClick={() => handleVatOptionClick("0%")}
@@ -71,27 +71,18 @@ const VatRateSelector = ({ setVatRate }: VatRateSelectorProps) => {
       </div>
 
       {selectedOption === "Custom" && (
-        <input
-          type="text"
-          value={customValue}
-          onChange={handleCustomChange}
-          placeholder="0-100 %"
-          style={{
-            width: "80px",
-            minWidth: "80px",
-            height: "60px",
-            borderRadius: "30px",
-            padding: "0 12px",
-            fontSize: fonts.medium,
-            fontFamily: fonts.body,
-            fontWeight: fonts.mediumWeight,
-            color: themeData.pickColor,
-            margin: "8px 0",
-            backgroundColor: themeData.pickColorBg,
-            border: "none",
-            outline: "none",
-          }}
-        />
+        <div className={styles.customInputContainer}>
+          <input
+            name="custom-vat-rate"
+            id="custom-vat-rate"
+            type="text"
+            value={customValue}
+            onChange={handleCustomChange}
+            placeholder="0-100"
+            className={styles.customInput}
+          />
+          <div className={styles.percentSymbol}>%</div>
+        </div>
       )}
     </div>
   );

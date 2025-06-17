@@ -80,7 +80,7 @@ const Footer = ({ companyName, invoiceId }: FooterProps) => {
         </div>
       </div>
       <div
-        //TODO: Add pagination
+        //TODO: Add Pagination
         style={{
           fontFamily: fonts.body,
           fontWeight: fonts.lightWeight,

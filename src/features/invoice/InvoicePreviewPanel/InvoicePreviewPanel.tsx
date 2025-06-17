@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import NotesSection from "../components/InvoicePreview/NotesSection";
 import ItemDetails from "../components/InvoicePreview/ItemDetails";
 import { useInvoiceForm } from "../../../context/InvoiceFormContext";
+import MiniSummary from "../components/InvoiceForm/MiniSummary/MiniSummary";
 
 const InvoicePreviewPanel = () => {
   const { themeData } = useTheme();
@@ -18,6 +19,7 @@ const InvoicePreviewPanel = () => {
   const formattedDueDate = formData.dueDate
     ? dayjs(formData.dueDate, "YYYY-MM-DD").format("DD.MM.YYYY")
     : "";
+
   return (
     <div
       style={{
@@ -81,6 +83,7 @@ const InvoicePreviewPanel = () => {
             gap: "12px",
           }}
         >
+          <MiniSummary></MiniSummary>
           <NotesSection></NotesSection>
           <Footer companyName="Acme Inc." invoiceId="#INV-71"></Footer>
         </div>

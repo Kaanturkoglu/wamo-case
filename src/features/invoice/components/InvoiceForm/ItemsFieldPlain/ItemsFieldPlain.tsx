@@ -1,94 +1,39 @@
+// src/components/forms/ItemsFieldPlain/ItemsFieldPlain.tsx
 import { fonts } from "../../../../../constants/fonts";
 import { useTheme } from "../../../../../hooks/useTheme";
 import boxIconLightTheme from "../../../../../assets/boxIconLightTheme.png";
 import boxIconDarkTheme from "../../../../../assets/boxIconDarkTheme.png";
 import type { ItemsFieldPlainProps } from "./ItemsFieldPlain.types";
+import styles from "../../../../../styles/components/forms/ItemsFieldPlain.module.css";
 
 const ItemsFieldPlain = ({ onClick }: ItemsFieldPlainProps) => {
   const { theme, themeData } = useTheme();
 
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}
-    >
-      <div
-        style={{
-          fontFamily: fonts.body,
-          fontWeight: fonts.boldWeight,
-          fontSize: fonts.medium,
-          color: themeData.text,
-          marginBottom: "8px",
-        }}
-      >
-        Items
-      </div>
-      <div
-        style={{
-          width: "100%",
-          height: "80px",
-          backgroundColor: themeData.primary,
-          borderRadius: "10px",
-          cursor: "pointer",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "16px",
-        }}
-        onClick={onClick}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              fontFamily: fonts.body,
-              fontWeight: fonts.boldWeight,
-              fontSize: fonts.large,
-              color: themeData.text,
-              marginBottom: "4px",
-              display: "flex",
-              height: "100%",
-            }}
-          >
-            Items
-          </div>
+  const cssVariables = {
+    "--items-field-bg-color": themeData.primary,
+    "--items-field-icon-bg": themeData.miniBackground,
+    "--items-field-text-color": themeData.text,
+    "--items-field-gray-color": themeData.gray,
+    "--items-field-font-family": fonts.body,
+    "--items-field-font-weight-bold": fonts.boldWeight,
+    "--items-field-font-weight-medium": fonts.mediumWeight,
+    "--items-field-font-size-medium": fonts.medium,
+    "--items-field-font-size-large": fonts.large,
+  } as React.CSSProperties;
 
-          <div
-            style={{
-              fontFamily: fonts.body,
-              fontWeight: fonts.mediumWeight,
-              fontSize: fonts.medium,
-              marginBottom: "4px",
-              color: themeData.gray,
-            }}
-          >
-            Select or add items
-          </div>
+  return (
+    <div className={styles.container} style={cssVariables}>
+      <div className={styles.header}>Items</div>
+      <div className={styles.fieldContainer} onClick={onClick}>
+        <div className={styles.textSection}>
+          <div className={styles.title}>Items</div>
+          <div className={styles.subtitle}>Select or add items</div>
         </div>
-        <div
-          style={{
-            backgroundColor: themeData.miniBackground,
-            borderRadius: "50px",
-            height: "50px",
-            width: "50px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <div className={styles.iconContainer}>
           <img
             src={theme === "light" ? boxIconLightTheme : boxIconDarkTheme}
-            alt="Date Pick"
-            style={{
-              height: "26px",
-              width: "26px",
-              objectFit: "contain",
-            }}
+            alt="Items"
+            className={styles.icon}
           />
         </div>
       </div>
